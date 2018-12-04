@@ -1,0 +1,75 @@
+{% extends 'addresses/base.html' %}
+{% block content %}
+    <form class="form-horizontal" method="POST" action="">
+        {% csrf_token %}
+        <div class="row spacer">
+            <div class="col-2">
+                <label>{{ person_form.first_name.label }}</label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    {{ person_form.first_name }}
+                </div>
+            </div>
+        </div>
+        <div class="row spacer">
+            <div class="col-2">
+                <label>{{ person_form.last_name.label }}</label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    {{ person_form.last_name }}
+                </div>
+            </div>
+        </div>
+        <div class="row spacer">
+            <div class="col-2">
+                <label>{{ person_form.description.label }}</label>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    {{ person_form.description }}
+                </div>
+            </div>
+        </div>
+        {{ email_formset.management_form }}
+        {% for m_form in email_formset %}
+            <div class="row m_form-row spacer">
+                <div class="col-2">
+                    <label>{{ m_form.mail.label }}</label>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        {{ m_form.mail }}
+                        {{ m_form.m_type }}
+                        <div class="input-group-append">
+                            <button class="btn btn-success add-m_form-row">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+          {{ phone_formset.management_form }}
+        {% for p_form in phone_formset %}
+            <div class="row p_form-row spacer">
+                <div class="col-2">
+                    <label>{{ p_form.p_num.label }}</label>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        {{ p_form.p_num }}
+                        {{ p_form.p_type }}
+                        <div class="input-group-append">
+                            <button class="btn btn-success add-p_form-row">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row spacer">
+            <div class="col-4 offset-2">
+                <button type="submit" class="btn btn-block btn-primary">Dodaj osobę</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
