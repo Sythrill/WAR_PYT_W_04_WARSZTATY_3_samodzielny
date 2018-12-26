@@ -1,0 +1,40 @@
+{% extends 'addresses/base.html' %}
+{% block content %}
+    <div class="content-section">
+        <div class="row">
+            <div class="container">
+                <h1>Informacja o grupie</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ group.group_name }}</legend>
+                        <p>
+                            {{ group.group_desc }}
+                        </p>
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Członkowie</legend>
+                    <ul class="list-group">
+                        {% for member in members %}
+                            <li class="list-group-item list-group-item-light">
+                                {{ member.first_name }} {{ member.last_name }}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item list-group-item-danger">
+                                Grupa jest pusta
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url "edit_group" group.pk %}">Edytuj</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url "delete_group" group.pk %}">Usuń</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

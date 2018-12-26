@@ -3,7 +3,7 @@
     <div class="content-section">
         <div class="row">
             <div class="container">
-                <h1>Lista kontaktów</h1>
+                <h1>Lista Grup</h1>
             </div>
         </div>
         <div class="row">
@@ -11,19 +11,22 @@
                 <table class="table table-secondary">
                     <thead>
                     <tr>
-                        <td>Kontakt</td>
+                        <td>Nazwa</td>
                         <td>Opis</td>
+                        <td>Członkowie</td>
                         <td>Akcje</td>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for person in persons %}
+                    {% for object in object_list %}
                         <tr>
-                            <td>{{ person.first_name }} {{ person.last_name }}</td>
-                            <td>{{ person.description }}</td>
-                            <td><a href="{% url "contact_info" person.id %}">Info</a> | <a
-                                    href="{% url "edit_contact" person.pk %}">Edytuj</a> | <a
-                                    href="{% url "delete_contact" person.id %}">Usuń</a></td>
+                            <td>{{ object.group_name }}</td>
+                            <td>{{ object.group_desc }}</td>
+                            <td>{{ object.members }}</td>
+                            <td><a href="{% url "group_info" object.id %}">Info</a> | <a
+                                    href="{% url "edit_group" object.pk %}">Edytuj</a> | <a
+                                    href="{% url "delete_group" object.pk %}">Usuń</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -32,7 +35,7 @@
         </div>
         <div class="row">
             <div class="container">
-                <a class="btn btn-info mb-4" href="{% url 'add_person' %}">Nowy kontakt</a>
+                <a class="btn btn-info mb-4" href="{% url 'add_group' %}">Nowa grupa</a>
             </div>
         </div>
     </div>

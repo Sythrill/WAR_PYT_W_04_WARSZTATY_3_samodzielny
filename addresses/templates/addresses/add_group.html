@@ -1,0 +1,15 @@
+{% extends "addresses/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Nowa Grupa</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <div class="form-group mt-2">
+                <button class="btn btn-outline-info" type="submit">Zapisz</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

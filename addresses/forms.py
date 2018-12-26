@@ -1,24 +1,31 @@
 from django import forms
-from django.forms import formset_factory
+from django.forms import inlineformset_factory, ModelMultipleChoiceField, CheckboxSelectMultiple
 
 from addresses.models import *
 
 
-class AddPersonForm(forms.Form):
-    first_name = forms.CharField(label="Imię", max_length=64)
-    last_name = forms.CharField(label="Nazwisko", max_length=64)
-    description = forms.CharField(label="Opis", widget=forms.Textarea)
+class AddPersonForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = "first_name", "last_name", "description", "groups"
+
+class AddEmailForm(forms.ModelForm):
+    class Meta:
+        model = EmailAddress
+        fields = "__all__"
 
 
-class AddEmailForm(forms.Form):
-    mail = forms.EmailField(label="Email")
-    m_type = forms.ChoiceField(label="Rodzaj maila", choices=TYPES)
+class AddPhoneForm(forms.ModelForm):
+    class Meta:
+        model = PhoneNumber
+        fields = "__all__"
 
 
-class AddPhoneForm(forms.Form):
-    p_num = forms.CharField(label="Telefon", max_length=64)
-    p_type = forms.ChoiceField(label="Rodzaj telefonu", choices=TYPES)
+class AddAddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = "__all__"
 
 
-EmailFormset = formset_factory(AddEmailForm, extra=1)
-PhoneFormset = formset_factory(AddPhoneForm, extra=1)
+PhoneFormSet = inlineformset_factory(Person, PhoneNumber, fields='__all__', extra=1)
+EmailFormSet = inlineformset_factory(Person, EmailAddress, fields='__all__', extra=1)

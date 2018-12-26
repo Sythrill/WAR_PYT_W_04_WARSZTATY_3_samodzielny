@@ -20,5 +20,13 @@ from addresses.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("addresses/add/", AddPersonView.as_view(), name="add_person"),
-    path("addresses/all", GetAllPersonsView.as_view(), name="all"),
+    path("addresses/all/", GetAllPersonsView.as_view(), name="all"),
+    path("addresses/contact_info/<int:id>/", ContactInfoView.as_view(), name="contact_info"),
+    path("addresses/edit_cocntact/<int:pk>/", ContactEditView.as_view(), name="edit_contact"),
+    path("addresses/del_cocntact/<int:pk>/", ContactDeleteView.as_view(), name="delete_contact"),
+    path("addresses/add_group/", CreateGroupView.as_view(), name="add_group"),
+    path("addresses/all_groups/", GroupListView.as_view(), name="all_groups"),
+    path("addresses/group_info/<int:id>", GroupInfoView.as_view(), name="group_info"),
+    path("addresses/edit_group/<int:pk>/", EditGroupView.as_view(), name="edit_group"),
+    path("addresses/del_group/<int:pk>/", GroupDeleteView.as_view(), name="delete_group"),
 ]

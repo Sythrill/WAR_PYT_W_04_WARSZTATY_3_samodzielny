@@ -1,0 +1,85 @@
+{% extends 'addresses/base.html' %}
+{% block content %}
+    <div class="content-section">
+        <div class="row">
+            <div class="container">
+                <h1>Informacja o kontakcie</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ person }}</legend>
+                    {% if person.description %}
+                        <p>
+                            {{ person.description }}
+                        </p>
+                    {% else %}
+                        <p>
+                            Brak opisu
+                        </p>
+                    {% endif %}
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Adres</legend>
+                    {% if person.address %}
+                        <p>
+                            {{ person.address.city }}, {{ person.address.street }} {{ person.address.street_number }}
+                            m.{{ person.address.flat_number }}
+                        </p>
+                    {% else %}
+                        <p>Brak adresu</p>
+                    {% endif %}
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Grupy</legend>
+                    <ul class="list-group">
+                        {% for group in person.groups.all %}
+                            <li class="list-group-item list-group-item-light">
+                                {{ group.group_name }}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item list-group-item-danger">
+                                Brak grupy
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Telefony</legend>
+                    <ul class="list-group">
+                        {% for phone in phone_numbers %}
+                            <li class="list-group-item list-group-item-light">
+                                {{ phone.p_num }} {{ phone.get_p_type_display }}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item list-group-item-danger">
+                                Brak numeru telefonu
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Maile</legend>
+                    <ul class="list-group">
+                        {% for mail in emails %}
+                            <li class="list-group-item list-group-item-light">
+                                {{ mail.mail }} {{ mail.get_m_type_display }}
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item list-group-item-danger">
+                                Brak maila
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'edit_contact' person.id %}">Edytuj</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete_contact' person.id %}">Usuń</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
