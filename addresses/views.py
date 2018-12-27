@@ -9,6 +9,9 @@ from .forms import *
 from .models import *
 # Create your views here.
 
+class GetStartedView(View):
+    def get(self, request):
+        return render(request, "addresses/index.html", locals())
 
 class AddPersonView(CreateView):
     model = Person

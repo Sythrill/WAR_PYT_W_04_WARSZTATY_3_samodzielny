@@ -29,4 +29,5 @@ urlpatterns = [
     path("addresses/group_info/<int:id>", GroupInfoView.as_view(), name="group_info"),
     path("addresses/edit_group/<int:pk>/", EditGroupView.as_view(), name="edit_group"),
     path("addresses/del_group/<int:pk>/", GroupDeleteView.as_view(), name="delete_group"),
+    path("", GetStartedView.as_view(), name="index")
 ]
