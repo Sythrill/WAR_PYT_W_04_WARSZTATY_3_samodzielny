@@ -55,6 +55,13 @@ class AddPersonView(CreateView):
         self.object = form.save()
         return HttpResponseRedirect(reverse_lazy("all"))
 
+    def form_invalid(self, form, phone_formset, email_formset, address_form):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  phone_formset=phone_formset,
+                                  email_formset=email_formset,
+                                  address_form=address_form))
+
 
 class ContactEditView(UpdateView):
     model = Person
